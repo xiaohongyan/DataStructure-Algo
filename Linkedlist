@@ -1,0 +1,50 @@
+class Solution(object):
+  def get_tail(self,head):
+    while head.next:
+      head=head.next
+    return head
+
+  def quickSort(self,head):
+    if not head:
+      return head
+    tail=self.get_tail(head)
+    head,tail=self._quickSortLinkedList(head,tail)
+    tail.next=None
+    return head
+
+  def _quickSortLinkedList(self,head,tail):
+    if head is not tail:
+      left_head, left_tail, right_head, right_tail, reference_head, reference_tail=self._quickSortLinkedListPartition(head,tail)
+      if left_head is None:
+        head=reference_head
+      else:
+        left_head,left_tail=self._quickSortLinkedList(left_head,left_tail)
+        head=left_head
+        left_tail.next=reference_head
+      if right_head is None:
+        tail=reference_tail
+      else:
+        right_head,right_tail=self._quickSortLinkedList(right_head,right_tail)
+        reference_head.next=right_head
+        tail=right_tail
+    return head,tail
+
+
+  def _quickSortLinkedListPartition(self,head,tail):
+    left_head,right_head,reference_head=ListNode(0),ListNode(0),ListNode(0)
+    left_tail,right_tail,reference_tail=left_head,right_head,reference_head
+    curr_node=head
+    while curr_node:
+      if curr_node.val>tail.val:
+        right_tail.next=curr_node
+        right_tail=right_tail.next    
+      elif curr_node.val<tail.val:
+        left_tail.next=curr_node
+        left_tail=left_tail.next  
+      else:
+        reference_tail.next=curr_node
+        reference_tail=reference_tail.next    
+      curr_node=curr_node.next
+    left_tail.next=None
+    right_tail.next=None
+    return left_head.next,left_tail,right_head.next,right_tail,reference_head.next,reference_tail
