@@ -1,0 +1,42 @@
+class Solution(object):
+  def totalOccurrence(self, array, target):
+    """
+    input: int[] array, int target
+    return: int
+    """
+    # write your solution here
+    if not array or len(array)==0:
+      return 0
+    left = 0
+    right = len(array)-1
+    begin = 0
+    end = 0
+    while left<right-1:
+      mid = (left+right)/2
+      if array[mid]<target:
+        left = mid
+      else:
+        right = mid
+    if array[left]==target:
+      begin =left
+    elif array[right]==target:
+      begin = right
+    else:
+      return 0
+  
+    left = 0
+    right = len(array)-1     
+    while left<right-1:
+      mid = (left+right)/2
+      if array[mid]>target:
+        right = mid
+      else:
+        left = mid
+    if array[right]==target:
+      end =right
+    elif array[left]==target:
+      end = left
+    return end-begin+1
+   
+        
+       
