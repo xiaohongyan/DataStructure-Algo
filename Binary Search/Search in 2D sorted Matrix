@@ -1,0 +1,23 @@
+class Solution(object):
+  def search(self, matrix, target):
+    """
+    input: int[][] matrix, int target
+    return: int[]
+    """
+    # write your solution here
+    left = 0
+    N=len(matrix)
+    M = len(matrix[0])
+    right = N*M-1
+    while left<=right:
+      mid = (left+right)/2
+      rowNo = mid/M # 注意是除以列的数
+      colNo = mid%M
+      if matrix[rowNo][colNo] < target:
+        left = mid+1
+      elif matrix[rowNo][colNo] > target:
+        right = mid-1
+      else:
+        return [rowNo,colNo]
+    return [-1,-1]
+    
