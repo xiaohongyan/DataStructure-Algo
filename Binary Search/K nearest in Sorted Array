@@ -1,0 +1,42 @@
+class Solution(object):
+  def kClosest(self, array, target, k):
+    """
+    input: int[] array, int target, int k
+    return: int[]
+    """
+    # write your solution here
+    left = 0
+    right = len(array)-1
+    closet = 0
+    while left<right-1:
+      mid = (left+right)/2
+      if array[mid]<target:
+        left=mid
+      elif array[mid]>target:
+        right = mid
+      else:
+        closet = mid
+        right = mid
+    if abs(array[left]-target)<=abs(array[right]-target):
+      closet = left
+    else:
+      closet = right     
+    list1 = []
+    print closet
+    left = closet
+    right = closet
+    if k ==0:
+      return list1
+    list1.append(array[closet])
+    while len(list1)<k:
+      if left-1>=0 and right+1<len(array) and abs(array[left-1]-target)<=abs(array[right+1]-target):
+        list1.append(array[left-1])
+        left-=1
+      elif left-1>=0 and right+1<len(array) and abs(array[left-1]-target)>abs(array[right+1]-target):
+        list1.append(array[right+1])
+        right+=1
+      elif left == 0:
+        list1.append(array[right+1])
+      else:
+        list1.append(array[left-1])
+    return list1
