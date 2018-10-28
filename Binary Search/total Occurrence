@@ -4,7 +4,7 @@ class Solution(object):
     input: int[] array, int target
     return: int
     """
-    # write your solution here
+    # 用last occurrence - first occurrence
     if not array or len(array)==0:
       return 0
     left = 0
