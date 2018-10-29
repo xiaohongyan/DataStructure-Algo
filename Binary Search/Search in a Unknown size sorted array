@@ -13,7 +13,7 @@ class Solution(object):
     i = 1
     while dic.get(i) and dic.get(i)<target:  #不停的扩大找array的边界
       i*=2
-    left = 0
+    left = 0 #left = i/2,前i/2一定比target 小
     right = i
     while left<=right:
       mid = (left+right)/2
