@@ -1,0 +1,48 @@
+# Search by index
+def searchByIndex(head,index):
+  if head is None or index<0:
+    return None
+  for i in range(index):
+    head = head.next
+    if head is None:
+      return None
+  return head
+  
+ # Search by value
+ def searchByValue(head,value):
+  if head is None:
+    return None
+  cur = head
+  while cur:
+    if cur.value == value:
+      return cur
+    cur = cur.next
+  return None
+  
+  #Add a node by index
+  def add_to_index(head,value,index):
+  if head is None or index <0:
+    return None
+  dummy = ListNode(None)
+  dummy.next = head
+  insert_place = searchByIndex(head,index-1)
+  if insert_place is None:
+    return None
+  newNode = ListNode(value)
+  newNode.next = insert_place.next
+  insert_place.next = newNode
+  return dummy.next
+  
+  #Delete a node by index
+  def del_to_index(head,index):
+  if head is None or index <0:
+    return None
+  dummy = ListNode(None)
+  dummy.next = head
+  del_place = searchByIndex(head,index-1)
+  if del_place is None:
+    return None
+  del_place.next = del_place.next.next
+  return dummy.next
+  
+  
