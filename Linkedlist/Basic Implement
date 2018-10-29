@@ -4,7 +4,7 @@ def searchByIndex(head,index):
     return None
   for i in range(index):
     head = head.next
-    if head is None:
+    if head is None: #index is out of boundry
       return None
   return head
   
