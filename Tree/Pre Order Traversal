@@ -1,1 +1,26 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution(object):
+  def preOrder(self, root):
+    """
+    input: TreeNode root
+    return: Integer[]
+    """
+    # write your solution here
+    self.res=[]
+    self.preOrderHelper(root,self.res)
+    return self.res
+  
+  def preOrderHelper(self,root,res):
+    if not root:
+      return root
+    res.append(root.val)
+    self.preOrderHelper(root.left,res)
+    self.preOrderHelper(root.right,res)
+    return res
 
+   
