@@ -23,3 +23,5 @@ class Solution(object):
     self.inOrderHelper(root.right,res)
     return self.res
   
+Time Conplexity:O(n), traverse every treeNode
+Space: O(height of the tree)
