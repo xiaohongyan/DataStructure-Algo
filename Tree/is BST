@@ -1,0 +1,67 @@
+Determine if a given binary tree is binary search tree.
+Assumptions
+There should no be duplicate keys in binary search tree.
+You can assume the keys stored in the binary search tree can not be Integer.MIN_VALUE or Integer.MAX_VALUE.
+Corner Cases
+What if the binary tree is null? Return true in this case
+
+#左节点一定小于root,右节点一定大于root，利用min和max进行比较
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution(object):
+  def isBST(self, root):
+    """
+    input: TreeNode root
+    return: boolean
+    """
+    # write your solution here
+    if not root:
+      return True
+    return self.isBSTHelper(root,float('-inf'),float('inf'))
+  
+  def isBSTHelper(self,root, min,max):
+    if not root:
+      return True
+    if root.val<=min or root.val>=max: #不能有duplicate,所以要有=号
+      return False
+    return self.isBSTHelper(root.left,min,root.val) and self.isBSTHelper(root.right,root.val,max)
+      
+Time:O(N)
+SPACE:O(N)
+
+
+#2 traversl the tree in inorder order and put every val in a list, the list should be ascending
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution(object):
+  def isBST(self, root):
+    """
+    input: TreeNode root
+    return: boolean
+    """
+    # write your solution here
+    
+    self.res = []
+    self.inOrder(root,self.res)
+    if len(self.res)==1:
+      return True
+    for i in range(0,len(self.res)-1):
+      if self.res[i]>=self.res[i+1]:
+        return False
+    return True
+    
+  def inOrder(self,root,res):
+    if root is None:
+      return root
+    self.inOrder(root.left,res)
+    res.append(root.val)
+    self.inOrder(root.right,res)
+    return res
