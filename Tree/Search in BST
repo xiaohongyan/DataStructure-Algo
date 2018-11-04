@@ -19,3 +19,19 @@ class Solution(object):
       return self.search(root.right,key)
     else:
       return root
+
+Time: O(N)
+SPACE: HEIGHT
+
+
+#iterative
+    if not root:
+      return None
+    cur = root
+    while cur:
+      if cur.val>key:
+        cur = cur.left
+      elif cur.val<key:
+        cur = cur.right
+      else:
+        return cur
