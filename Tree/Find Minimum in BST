@@ -1,0 +1,4 @@
+def findMin(self, root):
+  if not root:
+    return None
+  return self.findMin(root.left) or root
