@@ -7,7 +7,7 @@ class Solution(object):
     return: int[]
     """
     # write your solution here
-    for i in range(len(array)/2-1, -1,-1):
+    for i in range(len(array)/2-1, -1,-1):  # 这里的range(a,b) 中b是exclusive的，所以要执行到0的话需要-1
       self.siftdown(array,i)
     return array
       
