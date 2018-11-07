@@ -1,0 +1,30 @@
+# heapify a unsorted array into min heap
+
+class Solution(object):
+  def heapify(self, array):
+    """
+    input: int[] array
+    return: int[]
+    """
+    # write your solution here
+    for i in range(len(array)/2-1, -1,-1):
+      self.siftdown(array,i)
+    return array
+      
+  def siftdown(self,array,index):
+    left = 2*index+1
+    right = 2*index+2
+    while left < len(array)or right < len(array):
+      smallest = index
+      if left < len(array) and array[left]<array[smallest]:
+        smallest = left
+      if right < len(array) and array[right]<array[smallest]:
+        smallest = right
+      if smallest == index:
+        break
+      array[smallest],array[index] =array[index],array[smallest]
+      index = smallest
+      left = 2*index+1
+      right = 2*index+2
+     
+      
