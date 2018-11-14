@@ -1,0 +1,40 @@
+# Definition for a binary tree node.
+#找左右子树Node个数的最大差值
+#FIND the node with the max difference in the total number of descendents in its left/right substree
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, x):
+      self.val = x
+      self.left = None
+      self.right = None
+
+class resWrapper():
+  def __init__(self):
+    self.globalmax=-1
+    self.solution = None  #目标值
+
+def helper(root,res):
+  if not root:
+    return 0
+  left = helper(root.left,res)
+  right =helper(root.right,res)
+  dif = abs(left-right)
+  print 'dif: ',dif
+  if dif>res.globalmax:
+   res.globalmax = dif
+   res.solution = root
+  return left+right+1
+
+res = resWrapper()
+a = TreeNode(1)
+a.left = TreeNode(2)
+a.right = TreeNode(3)
+a.left.left = TreeNode(4)
+#a.left.right = TreeNode(5)
+a.left.left.left=TreeNode(5)
+a.left.left.right=TreeNode(6)
+re = helper(a,res)
+print res.globalmax
+print res.solution.val
+
+
