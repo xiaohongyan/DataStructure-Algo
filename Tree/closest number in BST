@@ -1,0 +1,53 @@
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, x):
+      self.val = x
+      self.left = None
+      self.right = None
+
+class resWrapper():
+  def __init__(self):
+    self.globalmin = float('inf')
+    self.solution = None
+
+def closest(root, target):
+    """
+    input: TreeNode root, int target
+    return: int
+    """
+    # write your solution here
+    if not root:
+      return None
+    if root.val == target:
+      return root.val
+    res = resWrapper()   
+    closestHelper(root,res,target)
+    return res.solution
+
+def closestHelper(root,res,target):
+  if not root:
+    return None
+  if root.val == target:
+    return root
+  if res.globalmin>abs(root.val-target):
+    res.globalmin=abs(root.val-target)
+    res.solution = root
+  if root.val>target:
+    return closestHelper(root.left,res,target) or root
+  if root.val<target:
+    return closestHelper(root.right,res,target) or root
+  return res.solution.val
+
+res = resWrapper()
+a = TreeNode(5)
+a.left = TreeNode(2)
+a.right = TreeNode(11)
+a.right.left = TreeNode(6)
+a.left.right = TreeNode(14)
+#a.left.left.left=TreeNode(5)
+#a.left.left.right=TreeNode(6)
+re = closestHelper(a,res,10)
+print res.globalmin
+print res.solution.val
+
+
